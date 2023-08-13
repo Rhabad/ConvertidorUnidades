@@ -119,6 +119,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUnidad2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="combo1">
           <Properties>
@@ -143,11 +146,17 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo2ActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUnidad1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

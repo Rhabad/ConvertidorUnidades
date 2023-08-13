@@ -4,6 +4,8 @@
  */
 package vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author NICOLAS
@@ -21,6 +23,8 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
 
     //para velocidad
     private String[] opcionesVelocidadCombo1 = {"Milla Por Hora", "Pie Por Segundo", "Metro Por Segundo", "Kilometro Por Hora"};
+
+    private double numero = 0;
 
     public ConvertidorUnidades() {
         initComponents();
@@ -61,6 +65,8 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
             }
         });
 
+        txtUnidad2.setText("0");
+
         combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija Unidad" }));
         combo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +75,13 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
         });
 
         combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija Unidad" }));
+        combo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo2ActionPerformed(evt);
+            }
+        });
+
+        txtUnidad1.setText("0");
 
         jLabel1.setText("Tipo De Unidad");
 
@@ -192,10 +205,27 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
     }//GEN-LAST:event_comboUnidadesActionPerformed
 
     private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
-        
+        double numeroConvertido = 0;
+        numero = Double.parseDouble(txtUnidad1.getText());
+
+        //Calculamos las unidades de Longitud
+        //si combo1 es combo...
+        if (combo1.getSelectedItem() == "Kilometro") {
+            //entonces...
+            JOptionPane.showMessageDialog(null, "dentro de kilometro");
+            //aca guardaremos una variable global que utilizaremos para conectar al combo2
+            
+        }
+
     }//GEN-LAST:event_combo1ActionPerformed
 
-    
+    private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
+        if (combo2.getSelectedItem() == "Metro") {
+            JOptionPane.showMessageDialog(null, "dentro de metro");
+            
+        }
+    }//GEN-LAST:event_combo2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combo1;
