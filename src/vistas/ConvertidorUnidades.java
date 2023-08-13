@@ -4,6 +4,7 @@
  */
 package vistas;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,7 +25,8 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
     //para velocidad
     private String[] opcionesVelocidadCombo1 = {"Milla Por Hora", "Pie Por Segundo", "Metro Por Segundo", "Kilometro Por Hora"};
 
-    private double numero = 0;
+    private double numero = 0, result = 0;
+    private String numeroConvertido = "";
 
     public ConvertidorUnidades() {
         initComponents();
@@ -34,7 +36,7 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
         combo1.setEnabled(false);
         combo2.setEnabled(false);
         txtUnidad1.setEnabled(false);
-        txtUnidad2.setEnabled(false);
+        txtUnidad2.setEditable(false);
     }
 
     /**
@@ -65,6 +67,8 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
             }
         });
 
+        txtUnidad2.setEditable(false);
+        txtUnidad2.setForeground(new java.awt.Color(0, 0, 0));
         txtUnidad2.setText("0");
 
         combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija Unidad" }));
@@ -81,7 +85,7 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
             }
         });
 
-        txtUnidad1.setText("0");
+        txtUnidad1.setText("1");
 
         jLabel1.setText("Tipo De Unidad");
 
@@ -167,7 +171,6 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
                 combo1.setEnabled(true);
                 combo2.setEnabled(true);
                 txtUnidad1.setEnabled(true);
-                txtUnidad2.setEnabled(true);
             }
         }
         if (opcion.equals("Masa")) {
@@ -178,7 +181,6 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
                 combo1.setEnabled(true);
                 combo2.setEnabled(true);
                 txtUnidad1.setEnabled(true);
-                txtUnidad2.setEnabled(true);
             }
         }
         if (opcion.equals("Velocidad")) {
@@ -189,7 +191,6 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
                 combo1.setEnabled(true);
                 combo2.setEnabled(true);
                 txtUnidad1.setEnabled(true);
-                txtUnidad2.setEnabled(true);
             }
         }
 
@@ -200,33 +201,302 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
             combo1.setEnabled(false);
             combo2.setEnabled(false);
             txtUnidad1.setEnabled(false);
-            txtUnidad2.setEnabled(false);
+            txtUnidad2.setEditable(false);
         }
     }//GEN-LAST:event_comboUnidadesActionPerformed
 
     private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
-        double numeroConvertido = 0;
-        numero = Double.parseDouble(txtUnidad1.getText());
-
-        //Calculamos las unidades de Longitud
-        //si combo1 es combo...
-        if (combo1.getSelectedItem() == "Kilometro") {
-            //entonces...
-            JOptionPane.showMessageDialog(null, "dentro de kilometro");
-            //aca guardaremos una variable global que utilizaremos para conectar al combo2
-            
-        }
-
+        //esta por estar
     }//GEN-LAST:event_combo1ActionPerformed
 
     private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
-        if (combo2.getSelectedItem() == "Metro") {
-            JOptionPane.showMessageDialog(null, "dentro de metro");
-            
-        }
+        convertirLongitud();
+        convertirMasa();
+        convertirVelocidad();
     }//GEN-LAST:event_combo2ActionPerformed
 
-
+    public void convertirLongitud(){
+        numero = Double.parseDouble(txtUnidad1.getText());
+        
+        //kilometros a...
+        //kilometro con metro
+        if (combo1.getSelectedItem() == "Kilometro") {
+            if (combo2.getSelectedItem() == "Metro") {
+                result = numero * 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //kilometro con centimetro
+        if (combo1.getSelectedItem() == "Kilometro") {
+            if (combo2.getSelectedItem() == "Centimetro") {
+                result = numero * 100000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //a kilometrs
+        if (combo1.getSelectedItem() == "Kilometro") {
+            if (combo2.getSelectedItem() == "Kilometro") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        
+        //metros a...
+        //kilometros
+        if (combo1.getSelectedItem() == "Metro") {
+            if (combo2.getSelectedItem() == "Kilometro") {
+                result = numero / 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //centimetrs
+        if (combo1.getSelectedItem() == "Metro") {
+            if (combo2.getSelectedItem() == "Centimetro") {
+                result = numero * 100;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //metros
+        if (combo1.getSelectedItem() == "Metro") {
+            if (combo2.getSelectedItem() == "Metro") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        
+        
+        //Centimetros a...
+        //kilometros
+        if (combo1.getSelectedItem() == "Centimetro") {
+            if (combo2.getSelectedItem() == "Kilometro") {
+                result = numero / 100000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //metros
+        if (combo1.getSelectedItem() == "Centimetro") {
+            if (combo2.getSelectedItem() == "Metro") {
+                result = numero / 100;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //centimetro
+        if (combo1.getSelectedItem() == "Centimetro") {
+            if (combo2.getSelectedItem() == "Centimetro") {
+                result = numero *1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+    }
+    
+    public void convertirMasa(){
+        //toneladass a...
+        //tonelada
+        if (combo1.getSelectedItem() == "Tonelada") {
+            if (combo2.getSelectedItem() == "Tonelada") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //kilogramo
+        if (combo1.getSelectedItem() == "Tonelada") {
+            if (combo2.getSelectedItem() == "Kilogramo") {
+                result = numero * 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //gramo
+        if (combo1.getSelectedItem() == "Tonelada") {
+            if (combo2.getSelectedItem() == "Gramo") {
+                result = numero * 1000000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        
+        
+        //kilogramo a...
+        //kilogramo
+        if (combo1.getSelectedItem() == "Kilogramo") {
+            if (combo2.getSelectedItem() == "Kilogramo") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //kilogramo
+        if (combo1.getSelectedItem() == "Kilogramo") {
+            if (combo2.getSelectedItem() == "Tonelada") {
+                result = numero / 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //gramo
+        if (combo1.getSelectedItem() == "Kilogramo") {
+            if (combo2.getSelectedItem() == "Gramo") {
+                result = numero * 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        
+        
+        //gramo a...
+        //gramo
+        if (combo1.getSelectedItem() == "Gramo") {
+            if (combo2.getSelectedItem() == "Gramo") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //kilogramo
+        if (combo1.getSelectedItem() == "Gramo") {
+            if (combo2.getSelectedItem() == "Kilogramo") {
+                result = numero / 1000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+        //Tonelada
+        if (combo1.getSelectedItem() == "Gramo") {
+            if (combo2.getSelectedItem() == "Tonelada") {
+                result = numero / 1000000;
+                txtUnidad2.setText(String.valueOf(result));
+            }
+        }
+    }
+    
+    public void convertirVelocidad(){
+        
+        //limitamos los decimales
+        int decimalLimit = 6;
+        DecimalFormat decimalFormat = new DecimalFormat("#." + "0".repeat(decimalLimit));
+        
+        
+        
+        //milla por hora a...
+        //milla por hora
+        if (combo1.getSelectedItem() == "Milla Por Hora") {
+            if (combo2.getSelectedItem() == "Milla Por Hora") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //pie por segundo
+        if (combo1.getSelectedItem() == "Milla Por Hora") {
+            if (combo2.getSelectedItem() == "Pie Por Segundo") {
+                result = numero * 1.467;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //metro por segundo
+        if (combo1.getSelectedItem() == "Milla Por Hora") {
+            if (combo2.getSelectedItem() == "Metro Por Segundo") {
+                result = numero * 2.237;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //kilometro por hora
+        if (combo1.getSelectedItem() == "Milla Por Hora") {
+            if (combo2.getSelectedItem() == "Kilometro Por Hora") {
+                result = numero * 1.609;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        
+        
+        
+        //pie por segundo a...
+        //milla por hora
+        if (combo1.getSelectedItem() == "Pie Por Segundo") {
+            if (combo2.getSelectedItem() == "Milla Por Hora") {
+                result = numero / 1.467;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //pie por segundo
+        if (combo1.getSelectedItem() == "Pie Por Segundo") {
+            if (combo2.getSelectedItem() == "Pie Por Segundo") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //metro por segundo
+        if (combo1.getSelectedItem() == "Pie Por Segundo") {
+            if (combo2.getSelectedItem() == "Metro Por Segundo") {
+                result = numero / 3.281;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //kilometro por hora
+        if (combo1.getSelectedItem() == "Pie Por Segundo") {
+            if (combo2.getSelectedItem() == "Kilometro Por Hora") {
+                result = numero * 1.097;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        
+        
+        //metro por segundo a...
+        //metro por segundo
+        if (combo1.getSelectedItem() == "Metro Por Segundo") {
+            if (combo2.getSelectedItem() == "Metro Por Segundo") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //milla Por hora
+        if (combo1.getSelectedItem() == "Metro Por Segundo") {
+            if (combo2.getSelectedItem() == "Milla Por Hora") {
+                result = numero * 2.237;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //milla Por hora
+        if (combo1.getSelectedItem() == "Metro Por Segundo") {
+            if (combo2.getSelectedItem() == "Pie Por Segundo") {
+                result = numero * 3.281;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //kilometro Por hora
+        if (combo1.getSelectedItem() == "Metro Por Segundo") {
+            if (combo2.getSelectedItem() == "Kilometro Por Hora") {
+                result = numero * 3.6;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        
+        
+        
+        //kilometro Por hora a...
+        //kilometro por hora
+        if (combo1.getSelectedItem() == "Kilometro Por Hora") {
+            if (combo2.getSelectedItem() == "Kilometro Por Hora") {
+                result = numero * 1;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //milla por hora
+        if (combo1.getSelectedItem() == "Kilometro Por Hora") {
+            if (combo2.getSelectedItem() == "Milla Por Hora") {
+                result = numero / 1.609;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //pie por segundo
+        if (combo1.getSelectedItem() == "Kilometro Por Hora") {
+            if (combo2.getSelectedItem() == "Pie Por Segundo") {
+                result = numero / 1.097;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        //metro por segundo
+        if (combo1.getSelectedItem() == "Kilometro Por Hora") {
+            if (combo2.getSelectedItem() == "Metro Por Segundo") {
+                result = numero / 3.6;
+                txtUnidad2.setText(String.valueOf(decimalFormat.format(result)));
+            }
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combo1;
     private javax.swing.JComboBox<String> combo2;
