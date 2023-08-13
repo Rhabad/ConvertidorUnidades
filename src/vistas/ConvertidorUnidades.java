@@ -62,6 +62,11 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
         });
 
         combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija Unidad" }));
+        combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo1ActionPerformed(evt);
+            }
+        });
 
         combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija Unidad" }));
 
@@ -186,6 +191,11 @@ public class ConvertidorUnidades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboUnidadesActionPerformed
 
+    private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
+        
+    }//GEN-LAST:event_combo1ActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combo1;
